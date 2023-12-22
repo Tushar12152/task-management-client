@@ -20,7 +20,7 @@ const CompletedTable = () => {
     // console.log(task);
     const complete=task.filter(item=>item.status=='complete')
 
-
+// console.log(complete);
 
     return (
         <div>

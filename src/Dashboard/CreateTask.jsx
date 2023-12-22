@@ -61,7 +61,7 @@ const CreateTask = () => {
         <label className="label">
           <span className="label-text">Title</span>
         </label>
-        <input   {...register("Title")} type="text" placeholder="Meals Title" className="input input-bordered"  required />
+        <input   {...register("Title")} type="text" placeholder="Title" className="input input-bordered"  required />
       </div>
 
     <div className="form-control  w-[50%]">

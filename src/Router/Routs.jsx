@@ -9,6 +9,8 @@ import CreateTask from "../Dashboard/CreateTask";
 import TodoTableList from "../Dashboard/TodoTableList";
 import OngoingTable from "../Dashboard/OngoingTable";
 import CompletedTable from "../Dashboard/completedTable";
+import Previous from "../Dashboard/Previous";
+import Profile from "../Dashboard/Profile";
 
 const Routs = createBrowserRouter([
     {
@@ -49,6 +51,14 @@ const Routs = createBrowserRouter([
         {
             path:'/dashboard/complete',
             element:<CompletedTable/>
+        },
+        {
+            path:'/dashboard/previous',
+            element:<Previous/>
+        },
+        {
+             path:'/dashboard/Profile',
+             element:<Profile/>
         }
     ]
    }

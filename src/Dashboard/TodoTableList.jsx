@@ -56,7 +56,7 @@ const TodoTableList = () => {
             <Title heading={'To-Do List '}></Title>
             
 
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10">
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:grid-cols-3 mt-10">
                     {task.map(item=><div key={item._id} className="card w-72 bg-base-100 shadow-xl">
   <div className="card-body">
     <h2 className="card-title">{item?.Title}</h2>
