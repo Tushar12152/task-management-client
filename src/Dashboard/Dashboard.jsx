@@ -33,12 +33,12 @@ const Dashboard = () => {
                             </li>
                             
                             <li>
-                                <NavLink to="/dashboard/allmeal">
+                                <NavLink to="/dashboard/ongoing">
                                     
                                 ongoing list</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/allreview">
+                                <NavLink to="/dashboard/complete">
                                 
                                 completed list </NavLink>
                             </li>
