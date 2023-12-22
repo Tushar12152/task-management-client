@@ -10,10 +10,11 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 
 
+
 const Register = () => {
 
     const [show,setShow]=useState(false)
-    
+   
     
 
 
@@ -22,21 +23,10 @@ const Register = () => {
     const axiosSecure=useAxiosSecure() 
 
 
-
-  //   const { data=[] } = useQuery({
-  //    queryKey: ['users'],
-  //    queryFn: async () =>{
-  //        const res=await axiosSecure.get(`/users`)
-  
-  //        return res.data
-  //    }
-     
-  //  })
+    
   
 
-  
-    //  console.log(data);
-  
+
   
       const {createUser,googlepopUp,logOut}=useAuth()
        const navigate= useNavigate()
@@ -68,7 +58,7 @@ const Register = () => {
  
  
                   const result = await createUser(email, password)
-                  console.log(result.user);
+                  // console.log(result.user);
  
                           if(result?.user){
                              

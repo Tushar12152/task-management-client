@@ -6,6 +6,8 @@ import Home from "../Pages/Home";
 import Dashboard from "../Dashboard/Dashboard";
 import CreateTask from "../Dashboard/CreateTask";
 
+import TodoTableList from "../Dashboard/TodoTableList";
+
 const Routs = createBrowserRouter([
     {
         path:"/",
@@ -33,6 +35,10 @@ const Routs = createBrowserRouter([
         {
             path:'/dashboard/createTask',
             element:<CreateTask/>
+        },
+        {
+            path:'/dashboard/todo',
+            element:<TodoTableList/>
         }
     ]
    }

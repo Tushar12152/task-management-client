@@ -1,53 +1,53 @@
 import swal from "sweetalert";
-
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
-import useAuth from "../Hooks/useAuth";
 import Title from "../API's/Title";
+import { useQuery } from "@tanstack/react-query";
+import useAuth from "../Hooks/useAuth";
+
+
 
 const CreateTask = () => {
-
-
-
-    const { user } = useAuth();
-    const userEmail = user?.email;
     const axiosSecure = useAxiosSecure();
-  
-    const { data = [] } = useQuery({
-      queryKey: ['users'],
-      queryFn: async () => {
-        const res = await axiosSecure.get(`/users/${userEmail}`);
-        return res.data;
-      }
-    });
-  
-    const [category, setCategory] = useState('breakfast');
+    const [priority, setPriority] = useState('');
+
+
+    const {user}=useAuth()
+    const userEmail=user?.email
+    const { data:users=[] } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () =>{
+            const res=await axiosSecure.get(`/users/${userEmail}`)
+    
+            return res.data
+        }
+        
+      })
+    
+    // console.log(data.name);
+
+
   
     const handleSelectChange = (event) => {
-      setCategory(event.target.value);
+        setPriority(event.target.value);
     };
   
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
   
     const onSubmit = async (data) => {
-    //   try {
+
+        const task = { ...data, Priority: priority,status:'todo',email:users?.email,name:users?.name };
+    // console.log(task);
+        const res = await axiosSecure.post('/tasks', task);
+        if (res?.data?.insertedId) {
+          swal("Wow!", "Your Task is uploaded Successfully", "success");
+          reset();
        
+
+    }
   
-        const task = { ...data, Category: category };
-    console.log(task);
-    //     const res = await axiosSecure.post('/Tasks', task);
-    //     if (res?.data?.insertedId) {
-    //       swal("Wow!", "Your Task is uploaded Successfully", "success");
-    //       reset();
-    //     }
-    //   } catch (error) {
-    //     console.error('Error upload img', error);
-    //   }
-    };
-  
-  
+}
 
 
     return (
@@ -81,17 +81,9 @@ const CreateTask = () => {
 
 
     <div className="lg:flex gap-4">
-    {/* <div className="form-control w-[50%]">
-        <label className="label">
-          <span className="label-text">Image</span>
-        </label>
-        <input {...register("image")} type="file" placeholder=""   accept='image/*' id="image" className="input input-bordered" required />
-      </div> */}
-
-
 <div className="form-control  w-[50%]">
         <label className="label">
-          <span className="label-text">Date</span>
+          <span className="label-text">DeadLines</span>
         </label>
         <input   {...register("date")} type="date" placeholder="Date" className="input input-bordered" required />
       </div>
@@ -100,7 +92,7 @@ const CreateTask = () => {
     <div className="form-control  w-[50%]">
         
         <label htmlFor="selectOption">Priority</label>
-    <select className="input input-bordered" id="category" name="category" value={category} onChange={handleSelectChange}>
+    <select className="input input-bordered" id="category" name="category" value={priority} onChange={handleSelectChange}>
       <option value="low">Low</option>
       <option value="moderate">Moderate</option>
       <option value="high">High</option>

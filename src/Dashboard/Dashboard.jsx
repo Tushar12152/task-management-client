@@ -20,7 +20,7 @@ const Dashboard = () => {
                                 create new tasks</NavLink>
                             </li>
                             <li>
-                                <NavLink to="/dashboard/manageUsers">
+                                <NavLink to="/dashboard/todo">
                             
                                 to-do list</NavLink>
                             </li>
@@ -64,7 +64,7 @@ const Dashboard = () => {
             <div className="col-span-7 md:col-span-9  p-4 md:p-8">
 
                 <Outlet></Outlet>
-                
+
             </div>
         </div>
         </div>
