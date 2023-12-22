@@ -11,6 +11,7 @@ import OngoingTable from "../Dashboard/OngoingTable";
 import CompletedTable from "../Dashboard/completedTable";
 import Previous from "../Dashboard/Previous";
 import Profile from "../Dashboard/Profile";
+import Update from "../Dashboard/Update";
 
 const Routs = createBrowserRouter([
     {
@@ -59,6 +60,11 @@ const Routs = createBrowserRouter([
         {
              path:'/dashboard/Profile',
              element:<Profile/>
+        },
+        {
+            path:'/dashboard/update/:id',
+            element:<Update/>,
+            loader:({params})=>fetch(`http://localhost:5001/tasks/${params.id}`)
         }
     ]
    }

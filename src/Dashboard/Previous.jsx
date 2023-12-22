@@ -4,6 +4,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
+import { Link } from "react-router-dom";
 
 const Previous = () => {
 
@@ -83,7 +84,7 @@ const Previous = () => {
       <td>{item?.Title}</td>
       <td>{item?.Priority}</td>
       <td>{item?.status}</td>
-      <td><button  className="text-xl text-[#6069a6]"><AiFillEdit/></button></td>
+      <td><Link to={`/dashboard/update/${item._id}`}><button  className="text-xl text-[#6069a6]"><AiFillEdit/></button></Link></td>
       <td><button onClick={()=>handleDelete(item?._id,item?.Title)} className="text-xl text-[#6069a6]"><AiFillDelete/></button></td>
     </tr>)
       
