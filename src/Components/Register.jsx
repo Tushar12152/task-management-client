@@ -38,10 +38,59 @@ const Register = () => {
     //  console.log(data);
   
   
-      const {createUser,googlepopUp,logOut,user}=useAuth()
+      const {createUser,googlepopUp,logOut}=useAuth()
        const navigate= useNavigate()
-      const userMail=user?.email
+      //  const userMail=user?.email;
+      // user
+      //  console.log(userMail);
      
+
+       const handleRegister=async(e)=>{
+        e.preventDefault()
+        const form=e.target;
+ 
+       
+ 
+ 
+         const name= form.name.value;
+         const photo= form.photo.files[0]
+         const img= await imageUpload(photo)
+         const image=img?.data?.display_url
+         const email=form.email.value;
+         const password=form.password.value;
+ 
+         const usersInfo={
+                      image,
+                      email,
+                      name,
+                      
+                  }
+ 
+ 
+                  const result = await createUser(email, password)
+                  console.log(result.user);
+ 
+                          if(result?.user){
+                             
+                              axiosSecure.post('/users',usersInfo)
+                              .then(res=>{
+                                   if(res?.data?.insertedId){
+                                    toast.success('Your Registration Compleate')
+                                    logOut()
+                                    .then(()=>{
+                                        navigate('/login')})
+                                   }
+                              })
+              
+                             
+                          }
+ 
+       
+ 
+ 
+         
+         // console.log(name,image,email,password);
+ }
   
   
       
@@ -87,47 +136,7 @@ const Register = () => {
 
 
 
-const handleRegister=async(e)=>{
-       e.preventDefault()
-       const form=e.target;
 
-      
-
-
-        const name= form.name.value;
-        const photo= form.photo.files[0]
-        const img= await imageUpload(photo)
-        const image=img?.data?.display_url
-        const email=form.email.value;
-        const password=form.password.value;
-
-        const usersInfo={
-                     image,
-                     userMail,
-                     name,
-                     
-                 }
-
-
-                 const result = await createUser(email, password)
-                 console.log(result.user);
-
-                         if(result?.user){
-                            
-                             axiosSecure.post('/users',usersInfo)
-             
-                             toast.success('Your Registration Compleate')
-                             logOut()
-                             .then(()=>{
-                                 navigate('/login')})
-                         }
-
-      
-
-
-        
-        // console.log(name,image,email,password);
-}
 
 
 
