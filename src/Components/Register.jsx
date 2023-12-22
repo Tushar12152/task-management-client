@@ -1,20 +1,90 @@
 import { useState } from "react";
-import { AiFillEye, AiFillEyeInvisible, AiOutlineGoogle } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { AiFillEye, AiFillEyeInvisible, AiFillGithub, AiOutlineGoogle } from "react-icons/ai";
+import { Link, useNavigate } from "react-router-dom";
 
-// import useAuth from "../Hooks/useAuth";
-// import toast from "react-hot-toast";
-// import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { imageUpload } from "../API's/ImageUpload";
+import toast from "react-hot-toast";
+
+import useAuth from "../Hooks/useAuth";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 
 
 const Register = () => {
 
     const [show,setShow]=useState(false)
-    // const {createUser,user}=useAuth()
-    // const axiosSecure=useAxiosSecure()
-    // const userMail=user?.email
+    
+    
+
+
+
+
+    const axiosSecure=useAxiosSecure() 
+
+
+
+  //   const { data=[] } = useQuery({
+  //    queryKey: ['users'],
+  //    queryFn: async () =>{
+  //        const res=await axiosSecure.get(`/users`)
+  
+  //        return res.data
+  //    }
+     
+  //  })
+  
+
+  
+    //  console.log(data);
+  
+  
+      const {createUser,googlepopUp,logOut,user}=useAuth()
+       const navigate= useNavigate()
+      const userMail=user?.email
+     
+  
+  
+      
+  
+  
+  
+      const handleGooglePopup=()=>{
+        googlepopUp()
+        .then(res=>{
+            // console.log(res.user);
+  
+           
+            if(res.user){
+  
+            //   const usersInfo={
+            //     image:res?.user?.photoURL,
+            //     email:res?.user?.email,
+            //     name:res.user.displayName,
+              
+            // }
+  
+            // const sendData=data.find(item=>item.email===res?.user?.email)
+            // console.log(!sendData);
+            // if(!sendData){
+            //   axiosSecure.post('/users',usersInfo)
+            // }
+            
+  
+                // toast.success('You are Signed Up')
+                // navigate('/')
+               
+            }
+        })
+        .catch(err=>{
+            toast.error(err.message);
+        })
+    }
+  
+
+
+
+
+
 
 
 const handleRegister=async(e)=>{
@@ -31,30 +101,32 @@ const handleRegister=async(e)=>{
         const email=form.email.value;
         const password=form.password.value;
 
-        // const usersInfo={
-        //    image,name,
-        // }
-     
+        const usersInfo={
+                     image,
+                     userMail,
+                     name,
+                     
+                 }
 
 
-//         createUser(email,password)
-//         .then(res=>{
-//               if(res.user){
-               
-//                 axiosSecure.post('/users',usersInfo)
-//                 .then(res=>{
-//                     if(res.data.insertedId){
-//                         toast.success('Registration complete')
-//                     }
-//                 })
-                 
-//               }
-//         })
-//         .catch(err=>{
-//              toast.error(err.message);
-//         })
+                 const result = await createUser(email, password)
+                 console.log(result.user);
+
+                         if(result?.user){
+                            
+                             axiosSecure.post('/users',usersInfo)
+             
+                             toast.success('Your Registration Compleate')
+                             logOut()
+                             .then(()=>{
+                                 navigate('/login')})
+                         }
+
+      
+
+
         
-        console.log(name,image,email,password);
+        // console.log(name,image,email,password);
 }
 
 
@@ -115,8 +187,9 @@ const handleRegister=async(e)=>{
        <div>
            <h1 className="text-center font-bold text-lg text-[#6069a6] border-b-2  border-[#6069a6] w-60 mx-auto pb-2">Sign Up With</h1>
 
-           <div className="ml-36"> 
-              <span className=" text-2xl p-1   text-[#6069a6]"> <AiOutlineGoogle/></span>
+           <div className="ml-32 flex p-2 gap-5"> 
+              <button onClick={handleGooglePopup} className=" text-2xl  text-[#6069a6]"> <AiOutlineGoogle/></button>
+              <button className=" text-2xl  text-[#6069a6]"> <AiFillGithub/></button>
            </div>
        </div>
     </div>
