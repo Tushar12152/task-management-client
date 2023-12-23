@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { useQuery } from "@tanstack/react-query";
 
 
 
@@ -15,19 +16,10 @@ const Register = () => {
 
     const [show,setShow]=useState(false)
    
-    
-
-
-
 
     const axiosSecure=useAxiosSecure() 
 
 
-    
-  
-
-
-  
       const {createUser,googlepopUp,logOut}=useAuth()
        const navigate= useNavigate()
       //  const userMail=user?.email;
@@ -83,8 +75,15 @@ const Register = () => {
  }
   
   
-      
+ const { data= [] } = useQuery({
+  queryKey: ['user'],
+  queryFn: async () => {
+      const res = await axiosSecure.get(`/users`);
+      return res.data;
+  },
+});
   
+// console.log(data);
   
   
       const handleGooglePopup=()=>{
@@ -95,22 +94,22 @@ const Register = () => {
            
             if(res.user){
   
-            //   const usersInfo={
-            //     image:res?.user?.photoURL,
-            //     email:res?.user?.email,
-            //     name:res.user.displayName,
+              const usersInfo={
+                image:res?.user?.photoURL,
+                email:res?.user?.email,
+                name:res.user.displayName,
               
-            // }
+            }
   
-            // const sendData=data.find(item=>item.email===res?.user?.email)
+            const sendData=data.find(item=>item.email===res?.user?.email)
             // console.log(!sendData);
-            // if(!sendData){
-            //   axiosSecure.post('/users',usersInfo)
-            // }
+            if(!sendData){
+              axiosSecure.post('/users',usersInfo)
+            }
             
   
-                // toast.success('You are Signed Up')
-                // navigate('/')
+                toast.success('You are Signed Up')
+                navigate('/')
                
             }
         })
