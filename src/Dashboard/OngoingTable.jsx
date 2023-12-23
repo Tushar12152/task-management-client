@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import Title from "../API's/Title";
 
 const OngoingTable = () => {
 
@@ -24,6 +25,7 @@ const OngoingTable = () => {
 
     return (
         <div>
+          <Title heading={'On Going Tasks'}></Title>
              <div className="overflow-x-auto">
   <table className="table">
     {/* head */}

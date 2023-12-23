@@ -12,6 +12,9 @@ import CompletedTable from "../Dashboard/completedTable";
 import Previous from "../Dashboard/Previous";
 import Profile from "../Dashboard/Profile";
 import Update from "../Dashboard/Update";
+import Benefit from "../Components/Benifit";
+import Others from "../Components/Others";
+import About from "../Components/About";
 
 const Routs = createBrowserRouter([
     {
@@ -22,6 +25,18 @@ const Routs = createBrowserRouter([
                 path:'/',
                 element:<Home/>
                 
+            },
+            {
+                path:'/benifit',
+                element:<Benefit/>
+            },
+            {
+                path:"/others",
+                element:<Others/>
+            },
+            {
+                path:'/about',
+                element:<About/>
             }
         ]
     },
@@ -64,7 +79,7 @@ const Routs = createBrowserRouter([
         {
             path:'/dashboard/update/:id',
             element:<Update/>,
-            loader:({params})=>fetch(`http://localhost:5001/tasks/${params.id}`)
+            loader:({params})=>fetch(`https://task-management-server-brown-nu.vercel.app/tasks/${params.id}`)
         }
     ]
    }

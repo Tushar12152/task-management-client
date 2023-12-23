@@ -5,8 +5,15 @@ import MenuDropdown from "./MenuDropDown";
 const Nav = () => {
 
 
-    const nav=<div>
+    const nav=<div className="flex items-center gap-2 lg:gap-6">
           <NavLink to="/" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "font-bold text-[#6069a6]" : "" }>Home</NavLink>
+
+          <NavLink to="/benifit" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "font-bold text-[#6069a6]" : "" }>Benifit</NavLink>
+
+
+          <NavLink to="/Others" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "font-bold text-[#6069a6]" : "" }>Others</NavLink>
+
+          <NavLink to="/about" className={({ isActive, isPending }) => isPending ? "pending" : isActive ? "font-bold text-[#6069a6]" : "" }>About</NavLink>
     </div>
 
 

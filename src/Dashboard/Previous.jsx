@@ -5,6 +5,7 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import toast from "react-hot-toast";
 import swal from "sweetalert";
 import { Link } from "react-router-dom";
+import Title from "../API's/Title";
 
 const Previous = () => {
 
@@ -63,6 +64,9 @@ const Previous = () => {
 
     return (
         <div>
+
+<Title heading={'All  Tasks'}></Title>
+
               <div>
              <div className="overflow-x-auto">
   <table className="table">
